@@ -26,6 +26,7 @@ typedef struct
 	int permition;
 }infUser;
 	enum permition {noAcess,basicUser,adimin};
+	enum userFild {username,name,password,permition};
 
 typedef struct {
 	infUser user;

@@ -32,18 +32,18 @@ void  inicilizerFiles(tree** root){
 	// }
 }
 
-void writeTree(tree** root,FILE** arquivo){
+void writeTree(tree** root,FILE* arquivo){
 	if(*root != NULL){
-		fwrite(&(*root)->user,sizeof(infUser),1,(*arquivo));
-		write(&(*root)->left,&(*arquivo));
-		write(&(*root)->right,&(*arquivo));
+		fwrite(&(*root)->user,sizeof(infUser),1,arquivo);
+		writeTree(&(*root)->left,arquivo);
+		writeTree(&(*root)->right,arquivo);
 	}
 }
 
 void closingFiles(tree** root){
 	FILE *arquivo;
 	arquivo = fopen("acess/acesso.dat","wb");
-	writeTree(&(*root),&arquivo);	
+	writeTree(&(*root),arquivo);	
 	fclose(arquivo);
 	// Gravar Dadps do Grafos
 	// arquivo = fopen("rede.dat","+wb");
