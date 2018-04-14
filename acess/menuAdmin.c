@@ -1,31 +1,68 @@
-node seach(node* root,int value);
-int menuAdm(){
+void showUsers(tree **root);
+infUser insertUser(tree **root);
+node seachUser(tree **root);
+int menuAdm(tree** root){
 
 	int option;
-	printf("|---------- MENU -----------|\n");
-	printf("|-Inserir Usuario -------- [1] \n");
-	printf("|-Alterar Usuario -------- [2] \n");
-	printf("|-Exibir  Usuario -------- [3] \n");
-	printf("|-Buscar  Usuario -------- [4] \n");
-	printf("|-Inserir Sites ---------- [5] \n");
-	printf("|-Alterar Sites ---------- [6] \n");
-	printf("|-Exibir  Sites ---------- [7] \n");
-	printf("|-Buscar  Sites ---------- [8] \n");
-	printf("|-Sair ------------------- [0] \n");
-	printf("|-------------------------|");
-	scanf("%d",&option);
-	return option;
-
+	infUser *aux;
+	do
+	{
+		system("cls");
+		printf("|---------- MENU -----------|\n");
+		printf("|-Inserir Usuario -------- [1] \n");
+		printf("|-Alterar Usuario -------- [2] \n");
+		printf("|-Exibir  Usuario -------- [3] \n");
+		printf("|-Buscar  Usuario -------- [4] \n");
+		printf("|-Inserir Sites ---------- [5] \n");
+		printf("|-Alterar Sites ---------- [6] \n");
+		printf("|-Exibir  Sites ---------- [7] \n");
+		printf("|-Buscar  Sites ---------- [8] \n");
+		printf("|-Sair ------------------- [0] \n");
+		printf("|-------------------------|");
+		scanf("%d",&option);
+	//return option;
+		switch(option){
+			case 1:
+			insertUser(&(*root));
+			break;
+			case 2:
+			break;
+			case 3:
+			showUsers(&(*root));
+			break;
+			case 4:
+			aux = seachUser(&(*root));
+			show(aux);
+			break;
+			case 5:
+			break;
+			case 6:
+			break;
+			case 7:
+			break;
+			case 8:
+			break;
+			case 0:
+			break;
+			default:
+			break;
+		}
+	}while(option != 0);
 }
 
 
-void showusers(tree **root){	// Exibindo osusarios cadastrados
+show(infUser *user){
+	printf("NAME %s || USERNAME : %d || PASSWORD %s \n",user->name,user->username,user->password );
+}
+
+void showUsers(tree **root){	// Exibindo osusarios cadastrados
 	if(*root != NULL){
-		showusers(&(*root)->left);
-		printf("NAME %s || USERNAME : %d || PASSWORD %s \n",(*root)->user.name,(*root)->user.username,(*root)->user.password );
-		showusers(&(*root)->right);
+		showUsers(&(*root)->left);
+		show(&(*root)->user);
+		showUsers(&(*root)->right);
 	}
 }
+
 int generateUsername(tree** root){ 		// Gerar username
 	node aux = NULL;
 	int username=0;
@@ -37,7 +74,7 @@ int generateUsername(tree** root){ 		// Gerar username
 	}
 	while(aux !=NULL );
 
-	 return username;
+	return username;
 }
 
 infUser insertUser(tree **root){		// Cadastro
@@ -45,12 +82,12 @@ infUser insertUser(tree **root){		// Cadastro
 	printf("|---------- CADASTRO -----------|\n");
 	printf("|--Insira o nome  \n|--");
 	scanf("%s",user.name);
-	user.username = generateUsername(&(*root));
+	user.username = 12345;//generateUsername(&(*root));
 	printf("|--O seu username : \n|-- %d\n",user.username);
 	printf("|--Insira sua senha  \n|--");
 	scanf("%s",user.password);
-	user.permission = 1;
-	switch(user.permission){
+	user.permition = 1;
+	switch(user.permition){
 		case 1:
 		printf("|--Voce esta autorizado \n");
 		break;
@@ -61,19 +98,8 @@ infUser insertUser(tree **root){		// Cadastro
 	insert(&(*root),user);
 }
 
-node seach(node* root,int value){
-	if( (*root) == NULL)
-		return NULL;
-	else if((*root)->user.username < value){
-		return seach(&(*root)->right,value);
-	}else if((*root)->user.username > value){
-		return seach(&(*root)->left,value);
-	}else if ((*root)->user.username == value){
-		return *root;
-	}
-}
 
-seachUser(tree **root){
+node seachUser(tree **root){
 	int username;
 	node temp;
 	printf("|---------- Buscar -----------|\n");
@@ -81,7 +107,7 @@ seachUser(tree **root){
 	scanf("%d",&username);
 	temp = seach(&(*root),username);
 	if (temp != NULL)
-		printf("|-- NAME %s || USERNAME : %d || PASSWORD %s \n",temp->user.name,temp->user.username,temp->user.password );
+		return temp;
 	else
-		printf("|-- Usuario Invalido\n");
+		return NULL;
 }

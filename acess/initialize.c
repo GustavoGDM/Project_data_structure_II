@@ -1,8 +1,8 @@
 void  inicilizerFiles(tree** root){
-	FILE arquivo;
+	FILE *arquivo;
 	infUser user;
 	// insert(node* root,infUser user) 
-	arquivo = fopen("acesso.dat","rb+");
+	arquivo = fopen("acesso.dat","rb");
 	if(arquivo == NULL){
 		printf("Erro, Arquivo não existe!\n");
 		return;
@@ -42,7 +42,11 @@ void writeTree(tree** root,FILE** arquivo){
 
 void closingFiles(tree** root){
 	FILE *arquivo;
-	arquivo = fopen("acesso.dat","+wb");
+	arquivo = fopen("acesso.dat","wb");
+	if(arquivo == NULL){
+		printf("Erro, Arquivo não existe!\n");
+		return;
+	}
 	writeTree(&(*root),&arquivo);	
 	fclose(arquivo);
 	// Gravar Dadps do Grafos

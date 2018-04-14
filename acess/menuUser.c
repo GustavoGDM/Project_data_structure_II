@@ -1,5 +1,3 @@
-node seach(node* root,int value);
-
 int menuUser(){
 
 	int option;

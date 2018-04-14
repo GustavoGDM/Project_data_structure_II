@@ -14,9 +14,9 @@ node authenticateLogin(tree **root,infUser user){
 
 }
 
-void directingUser(node root){
+void directingUser(infUser user ,tree** root){
 	
-	switch( root->user.permition){
+	switch( user.permition){
 		case noAcess:
 
 			break;
@@ -24,14 +24,14 @@ void directingUser(node root){
 			menuUser();
 			break;
 		case adimin:
-			menuAdm();
+			menuAdm( &(*root));
 			break;
 
 	}
 
 }
 
-node loginUser(tree** root){
+infUser loginUser(tree** root){
 	infUser user;
 	node userNode;
 	begin:
@@ -50,11 +50,13 @@ node loginUser(tree** root){
 	}
 	else
 	{
-		return userNode;
+		return userNode->user;
 	}
 
 }
 
 void login(tree** root){
-	
+	infUser user;
+	user = loginUser( &(*root) );
+	directingUser(user,&(*root) ) ;
 }

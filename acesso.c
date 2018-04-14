@@ -36,17 +36,14 @@ typedef struct {
 
 typedef tree* node;
 
-#include "acess\treeUser.c"
-#include "acess\removeUser.c"
-#include "acess\initialize.c"
-#include "acess\MenuUser.c"
-#include "acess\login.c"
+#include "acess\acess.h"
 
 int main()
 {
 	tree *root=NULL;
 	inicilizerFiles(&root);
-	
+	//insertUser(&root);
+	login(&root);
 
 	closingFiles(&root);
 	return 0;

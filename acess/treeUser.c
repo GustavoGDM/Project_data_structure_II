@@ -14,6 +14,37 @@
 
 // typedef tree* node;
 
+node seach(node* root,int value){
+	if( (*root) == NULL)
+		return NULL;
+	else if((*root)->user.username < value){
+		return seach(&(*root)->right,value);
+	}else if((*root)->user.username > value){
+		return seach(&(*root)->left,value);
+	}else if ((*root)->user.username == value){
+		return *root;
+	}
+}
+
+node nodeCreation(infUser user){
+	node a;
+	a = (tree *)malloc(sizeof(tree));
+	if ( a == NULL)
+	{
+		system("cls");
+		printf("ERRO ,não ha memoria \n");
+		system("pause");
+		return NULL;
+	}
+	a->user = user;
+	a->left = NULL;
+	a->right = NULL;
+	a->bal = 0;
+	return a;
+}
+
+
+
 int treeHeight(node* root){
 	if( (*root) == NULL )
 		return -1;
@@ -102,23 +133,6 @@ void rotationRightLeft(node* root){
 	}
 	b->bal = 0;
 	*root = b;  
-}
-
-node nodeCreation(infUser user){
-	node a;
-	a = (tree *)malloc(sizeof(tree));
-	if ( a == NULL)
-	{
-		system("cls");
-		printf("ERRO ,não ha memoria \n");
-		system("pause");
-		return NULL;
-	}
-	a->user = user;
-	a->left = NULL;
-	a->right = NULL;
-	a->bal = 0;
-	return a;
 }
 
 void insert(node* root,infUser user){
