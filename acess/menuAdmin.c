@@ -82,16 +82,21 @@ infUser insertUser(tree **root){		// Cadastro
 	printf("|---------- CADASTRO -----------|\n");
 	printf("|--Insira o nome  \n|--");
 	scanf("%s",user.name);
-	user.username = 12345;//generateUsername(&(*root));
+	user.username = generateUsername(&(*root));
 	printf("|--O seu username : \n|-- %d\n",user.username);
 	printf("|--Insira sua senha  \n|--");
 	scanf("%s",user.password);
-	user.permition = 1;
+	printf("|--Insira a permicao de acesso [0]SemAcesso [1]Usuario [2]Administrador\n|--");
+	scanf("%d",&user.permition);
 	switch(user.permition){
-		case 1:
-		printf("|--Voce esta autorizado \n");
+		default:
+		case basicUser:
+		printf("|--Voce esta criando um Usuario \n");
 		break;
-		case 0:
+		case adimin:
+		printf("|--Voce esta criando um Administrador \n");
+		break;
+		case noAcess:
 		printf("|--Voce nao esta autorizado \n");
 		break;
 	}

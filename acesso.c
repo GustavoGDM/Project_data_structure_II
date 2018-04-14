@@ -42,7 +42,6 @@ int main()
 {
 	tree *root=NULL;
 	inicilizerFiles(&root);
-	//insertUser(&root);
 	login(&root);
 
 	closingFiles(&root);
