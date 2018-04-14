@@ -43,7 +43,6 @@ int main()
 	tree *root=NULL;
 	inicilizerFiles(&root);
 	login(&root);
-
 	closingFiles(&root);
 	return 0;
 }
