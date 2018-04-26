@@ -2,7 +2,7 @@ void showUsers(tree **root);
 void insertUser(tree **root);
 node seachUser(tree **root);
 
-int menuAdm(tree** root){
+int menuAdm(tree** root, Graph** graph ){
 
 	int option;
 	node aux;

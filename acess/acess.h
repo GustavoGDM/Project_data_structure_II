@@ -3,7 +3,7 @@
 
 #include "treeUser.c"
 #include "removeUser.c"
-#include "initialize.c"
+#include "initializeTree.c"
 #include "MenuAdmin.c"
 #include "MenuUser.c"
 #include "login.c"

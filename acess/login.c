@@ -43,7 +43,7 @@ infUser loginUser(tree** root){
 
 }
 
-void login(tree** root){
+void login(tree** root,Graph* graph){
 	node aux;
 	infUser user;
 	do{
@@ -57,10 +57,10 @@ void login(tree** root){
 				case noAcess:
 				break;
 				case basicUser:
-				menuUser();
+				menuUser(&aux, &graph);
 				break;
 				case adimin:
-				menuAdm( &aux );
+				menuAdm( &aux, &graph);
 				break;
 
 			}
