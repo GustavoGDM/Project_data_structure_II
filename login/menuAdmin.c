@@ -19,12 +19,12 @@ int menuAdm(tree** root, Graph** graph ){
 		printf("|- Alterar Sites ---------------- [07] | \n");// <- Funcionando
 		printf("|- Exibir  Sites ---------------- [08] | \n");// <- Funcionando
 		printf("|- Buscar  Sites ---------------- [09] | \n");// <- Funcionando
-		printf("|- Excluir sites ---------------- [10] | \n");
+		printf("|- Excluir sites ---------------- [10] | \n");// <- Funcionando
 		printf("|- Inserir Conexao -------------- [11] | \n");// <- Funcionando
 		printf("|- Exibir Sites e Conexao ------- [12] | \n");// <- Funcionando
-		printf("|- Alterar Conexao -------------- [13] | \n");
-		printf("|- Excluir Conexao -------------- [14] | \n");
-		printf("|- Numero de vertices e aresta -- [15] | \n");
+		printf("|- Alterar Conexao -------------- [13] | \n");// <- Funcionando
+		printf("|- Excluir Conexao -------------- [14] | \n");// <- Funcionando
+		printf("|- Numero de vertices e aresta -- [15] | \n");// <- Funcionando
 		printf("|- Sair ------------------------- [00] |\n");
 		printf("|------------------------------->");
 		scanf("%d",&option);
@@ -140,6 +140,8 @@ int menuAdm(tree** root, Graph** graph ){
 			printf("|                                      |\n");
 			printf("|             EXCLUIR SITE             |\n");
 			printf("|______________________________________|\n");
+			printf("|--------------- sites ----------------|\n");
+			showSites(&(*graph));
 			excludeSite(&(*graph));
 			printf("|______________________________________|\n");
 			getch();
@@ -167,8 +169,24 @@ int menuAdm(tree** root, Graph** graph ){
 			getch();
 			break;
 			case 13:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|            ALTERAR CONEXAO           |\n");
+			printf("|______________________________________|\n");
+			changeConnection(&(*graph));
+			printf("|______________________________________|\n");
+			getch();
 			break;
 			case 14:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|            EXCLUIR CONEXAO           |\n");
+			printf("|______________________________________|\n");
+			excludeConnection(&(*graph));
+			printf("|______________________________________|\n");
+			getch();
 			break;
 			case 15:
 			system("cls");

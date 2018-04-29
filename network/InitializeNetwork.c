@@ -65,7 +65,7 @@ void readGraph(Graph** graph){
 	Vertex list;
 	Edge adj;
 	int i;
-	file = fopen("network/REDE.dat","rb");
+	file = fopen("network/network.dat","rb");
 	if(file == NULL)
 	{
 		return;
@@ -89,7 +89,7 @@ void writeGraph(Graph** graph){
 	Vertex* list;
 	Edge* adj;
 	Graph *aux = (*graph);
-	file = fopen("network/REDE.dat","wb");
+	file = fopen("network/network.dat","wb");
 	fwrite(aux,sizeof(Graph),1,file);
 	for (list = (*graph)->listGraph ; list != NULL; list = list->nextVertex)
 		fwrite(list,sizeof(Vertex),1,file);

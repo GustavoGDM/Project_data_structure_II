@@ -19,7 +19,7 @@ void showSitesAndConnections(Graph** graph){
 		for (adj = list->nextEdge; adj != NULL ; adj = adj->nextEdge)
 		{
 
-			printf("|   |->Conexao : Id[%02d]\n|     [-> Disponibilidade [%0d]\n|     [-> Tempo de trasferencia [%.2f]\n      [-> Distancia em metros [%d]\n",adj->id,adj->avlbty,adj->transfer_speed,adj->distance );
+			printf("|   |->Conexao : Id[%02d]\n|     [-> Disponibilidade [%0d]\n|     [-> Tempo de trasferencia [%.2f]\n|     [-> Distancia em metros [%d]\n",adj->id,adj->avlbty,adj->transfer_speed,adj->distance );
 		}
 	}
 }
@@ -90,19 +90,20 @@ void searchSite(Graph** graph){
 	fgets(site.inf.name,20,stdin);
 	printf("|______________________________________|\n");
 	printf("|                                      |\n");
+
 	for (aux = (*graph)->listGraph; aux != NULL ; aux = aux->nextVertex )
 		if (strcmp(site.inf.name,aux->inf.name) == 0)
 			break;
 	if (aux == NULL)
 	{
-		printf("|--Site nao existe ");
+		printf("|--Site nao existe \n");
 		return;
 	}else{
 		printf("|-- Id[%02.2d]\n|-- Nome : %-0.20s",aux->id , aux->inf.name );
 		printf("|-- SO : %-0.20s|-- HD : %-0.20s",aux->inf.OS , aux->inf.HD );
 		printf("|-- Disk Space : %d\n",aux->inf.diskSpace);
 		for (adj = aux->nextEdge; adj != NULL ; adj = adj->nextEdge)
-			printf("     |->  Id[%02d] -> Disponibilidade [%02d] -> Tempo de trasferência [%.2f] -> Distancia [%d] ",adj->id,adj->avlbty,adj->transfer_speed,adj->distance );
+			printf("|   |->Conexao : Id[%02d]\n|     [-> Disponibilidade [%0d]\n|     [-> Tempo de trasferencia [%.2f]\n      [-> Distancia em metros [%d]\n",adj->id,adj->avlbty,adj->transfer_speed,adj->distance );
 	}
 }
 
@@ -122,7 +123,7 @@ void insertConnection(Graph** graph){
 	scanf("%i",&vert2);
 	list = (*graph)->listGraph;
 	if (searchVertx(&list, vert2) == NULL){
-		printf("|--Site nao existe ");
+		printf("|--Site nao existe \n");
 		return;
 	}
 	adj.listId = vert1;
@@ -142,4 +143,65 @@ void insertConnection(Graph** graph){
 	insertNetworkEdge(&(*graph),vert1,adj);
 
 
+}
+
+void changeConnection(Graph** graph){
+	Edge* adj,adjAux;
+	int vert1,option;
+	Vertex site,*aux;
+	printf("|--Insira o nome  \n|--");
+	fflush(stdin);
+	fgets(site.inf.name,20,stdin);
+	for (aux = (*graph)->listGraph; aux != NULL ; aux = aux->nextVertex )
+		if (strcmp(site.inf.name,aux->inf.name) == 0)
+			break;
+	if (aux == NULL)
+	{
+		printf("|--Site nao existe \n");
+		return;
+	}else{
+		printf("|______________________________________|\n");
+		printf("|                                      |\n");
+		printf("|-- Id[%02.2d]\n|-- Nome : %-0.20s",aux->id , aux->inf.name );
+		for (adj = aux->nextEdge; adj != NULL ; adj = adj->nextEdge)
+			printf("|   |->Conexao : Id[%02d]\n|     [-> Disponibilidade [%0d]\n|     [-> Tempo de trasferencia [%.2f]\n|     [-> Distancia em metros [%d]\n",adj->id,adj->avlbty,adj->transfer_speed,adj->distance );
+	}
+	printf("|--Insira o id Da Conexao\n|-- ");
+	scanf("%i",&vert1);
+
+	for (adj = aux->nextEdge; adj != NULL ; adj = adj->nextEdge){
+		if (vert1 == adj->id)
+		{
+			printf("|-- Digite o campo que sera mudado\n|-- Id [1]\n|-- Disponibilidade [2]\n|-- Tempo de trasferencia [3]\n|-- Distancia [4]\n|--");
+			scanf("%d",&option);
+			switch(option){
+				case 1:
+				printf("|--Insira o novo id \n|-- ");
+				scanf("%d",&adjAux.id);
+				adj->id = adjAux.id ;
+				break;
+				case 2:
+				printf("|--Insira a nova Disponibilidade\n|-- ");
+				scanf("%d",&adjAux.avlbty);
+				adj->avlbty = adjAux.avlbty;
+				break;
+				case 3:
+				printf("|--Insira o novo Tempo de trasferencia \n|-- ");
+				scanf("%d",&adjAux.transfer_speed);
+				adj->transfer_speed = adjAux.transfer_speed;
+				break;
+				case 4:
+				printf("|--Insira a nova Distancia \n|-- ");
+				scanf("%d",&adjAux.distance);
+				adj->distance = adjAux.distance;
+				break;
+				default:
+				printf("|--Opcao invalida\n|-- ");
+			}
+			printf("|--Campo alterado com sucesso\n|-- ");
+			return;
+		}
+	}
+		printf("|--Conexao nao existe \n");
+		return;
 }

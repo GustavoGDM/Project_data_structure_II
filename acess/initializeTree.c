@@ -2,7 +2,7 @@ void  inicilizerTree(tree** root){
 	FILE *file;
 	infUser user;
 	// insert(node* root,infUser user) 
-	file = fopen("acess/acesso.dat","rb");
+	file = fopen("acess/acess.dat","rb");
 	if(file == NULL){
 		printf("Erro, Arquivo usario não existe!\n");
 		return;
@@ -28,7 +28,7 @@ void writeTree(tree** root,FILE* file){
 
 void closingTree(tree** root){
 	FILE *file;
-	file = fopen("acess/acesso.dat","wb");
+	file = fopen("acess/acess.dat","wb");
 	writeTree(&(*root),file);	
 	fclose(file);
 }
