@@ -29,70 +29,74 @@
 // 	struct Vertex* listGraph;
 // }Graph;
 
-void readEdge(Graph** graph){
-	Edge adj;
-	FILE *file;
-	file = fopen("network/Edge.dat","rb");
-	if(file == NULL){
-		printf("Erro, Arquivo não existe!\n");
-		return;
-	}
-	while(1){
-
-		fread(&adj,sizeof(Edge),1,file);
-		if(feof(file))
-		{
-			fclose(file);
-			return;
-		}
-		insertNetworkEdge( &(*graph),adj);
-	}
-
-}
-
-void readVertex(Graph** graph){
-	Vertex list;
-	FILE *file;
-	file = fopen("network/vertex.dat","rb");
-	if(file == NULL){
-		printf("Erro, Arquivo não existe!\n");
-		return;
-	}
-	while(1){
-
-		fread(&list,sizeof(Vertex),1,file);
-		if(feof(file)){
-			fclose(file);
-			return;
-		}
-		insertNetworkVertex(&(*graph),list);
-	}
-}
-
 void inicilizerGraph(Graph** graph){
 	if((*graph) == NULL)
 	{
-		(*graph) = (Graph *) malloc(sizeof(Edge));
-		(*graph)->vert =0;
-		(*graph)->edge = 0;
-		(*graph)->listGraph = NULL;
+		Graph* aux;
+		aux = (Graph *) malloc(sizeof(Graph));
+		aux->vert =0;
+		aux->edge = 0;
+		aux->listGraph = NULL;
+		(*graph) =  aux;
 	}
-	readVertex(&(*graph));
-	readEdge(&(*graph));
+	readGraph(&(*graph));
 	return;
 }
 
 void closingGraph(Graph** graph){
-	FILE* fileVertex;
-	FILE* fileEdge;
-	Vertex *list = (*graph)->listGraph;
-	fileVertex = fopen("network/vertex.dat","wb");
-	fileEdge = fopen("network/Edge.dat","wb");
-	Edge* adj;
-	for (list ; list != NULL; list = list->nextVertex){
-		fwrite(list,sizeof(Vertex),1,fileVertex);
-		for (adj = list->nextEdge; adj != NULL ; adj = adj->nextEdge){
-			fwrite(adj,sizeof(Edge),1,fileEdge);
+	Vertex* list,* listAux;
+	Edge* adj,*adjAux;
+	for (list = (*graph)->listGraph ; list != NULL; list = list->nextVertex)
+		for (adj = list->nextEdge; adj != NULL ; adj = adjAux){
+			adjAux = adj->nextEdge;
+			free(adj);
 		}
+	for (list = (*graph)->listGraph ; list != NULL; list = listAux){
+		listAux = list->nextVertex;
+		free(list);
 	}
+	free((*graph));
+}
+
+
+void readGraph(Graph** graph){
+	FILE *file;
+	Graph aux;
+	Vertex list;
+	Edge adj;
+	int i;
+	file = fopen("network/REDE.dat","rb");
+	if(file == NULL)
+	{
+		return;
+	}
+	fread(&aux,sizeof(Graph),1,file);
+	for ( i = 0 ; i < aux.vert ; i++)
+	{
+		fread(&list,sizeof(Vertex),1,file);
+		insertNetworkVertex(&(*graph),list);
+	}
+	for ( i = 0 ; i < aux.edge ; i++)
+	{
+		fread(&adj,sizeof(Edge),1,file);
+		insertNetworkEdge( &(*graph), adj.listId, adj);
+	}
+	fclose(file);
+}
+
+void writeGraph(Graph** graph){
+	FILE *file;
+	Vertex* list;
+	Edge* adj;
+	Graph *aux = (*graph);
+	file = fopen("network/REDE.dat","wb");
+	fwrite(aux,sizeof(Graph),1,file);
+	for (list = (*graph)->listGraph ; list != NULL; list = list->nextVertex)
+		fwrite(list,sizeof(Vertex),1,file);
+	for (list = (*graph)->listGraph ; list != NULL; list = list->nextVertex)
+		for (adj = list->nextEdge; adj != NULL ; adj = adj->nextEdge)
+			fwrite(adj,sizeof(Edge),1,file);
+	fclose(file);
+	return;
+
 }

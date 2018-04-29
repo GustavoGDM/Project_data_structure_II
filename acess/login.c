@@ -18,9 +18,13 @@ infUser loginUser(tree** root){
 	infUser user;
 	node userNode;
 	begin:
-	system("cls");
-	printf("|---------- Login -----------|\n");
-	printf("|-- Para sair digite 0/0|\n");
+	//system("cls");
+	printf(" ______________________________________ \n");
+	printf("|                                      |\n");
+	printf("|                 LOGIN                |\n");
+	printf("|______________________________________|\n");
+	printf("|-------- Para sair digite 0/0 --------|\n");
+	printf("|______________________________________|\n");
 	printf("|--Insira seu username  \n|--");
 	scanf("%d",&user.username);
 	printf("|--Insira sua senha  \n|--");
@@ -43,7 +47,7 @@ infUser loginUser(tree** root){
 
 }
 
-void login(tree** root,Graph* graph){
+void login(tree** root,Graph** graph){
 	node aux;
 	infUser user;
 	do{
@@ -57,10 +61,10 @@ void login(tree** root,Graph* graph){
 				case noAcess:
 				break;
 				case basicUser:
-				menuUser(&aux, &graph);
+				menuUser(&aux, &(*graph));
 				break;
 				case adimin:
-				menuAdm( &aux, &graph);
+				menuAdm( &aux, &(*graph));
 				break;
 
 			}

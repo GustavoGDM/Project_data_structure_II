@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <wchar.h>
 #include <time.h>
 
 //_______________________________________________________________________
@@ -21,7 +22,7 @@
 typedef struct
 {
 	int username;
-	char name[80];
+	char name[20];
 	char password[10];
 	int permition;
 }infUser;
@@ -41,9 +42,11 @@ typedef tree* node;
 
 typedef struct
 {
+	int listId;
 	int id;
 	int avlbty;//availability
 	float transfer_speed;
+	int distance;
 	struct Edge* nextEdge;
 }Edge;
 
@@ -52,6 +55,9 @@ typedef struct
 	char name[20];
 	char OS[20];
 	char HD[20];
+	int diskSpace;
+	int flag;
+	
 }sit;
 
 typedef struct
@@ -79,8 +85,9 @@ int main()
 	inicilizerTree(&root);
 	inicilizerGraph(&graph);
 	login(&root,&graph);
-	closingTree(&root);
-	closingTree(&graph);
+	closingTree(&root);	
+	writeGraph(&graph);
+	closingGraph(&graph);
 	return 0;
 }
 

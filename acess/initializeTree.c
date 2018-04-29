@@ -4,7 +4,7 @@ void  inicilizerTree(tree** root){
 	// insert(node* root,infUser user) 
 	file = fopen("acess/acesso.dat","rb");
 	if(file == NULL){
-		printf("Erro, Arquivo não existe!\n");
+		printf("Erro, Arquivo usario não existe!\n");
 		return;
 	}
 	while (1){
