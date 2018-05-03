@@ -5,4 +5,7 @@
 #include"InitializeNetwork.c"
 #include"excludeNetwork.c"
 #include"handleNetwork.c"
+#include"BSF.c"
+#include"DSF.c"
+
 #endif // NETWORK_H_INCLUDED

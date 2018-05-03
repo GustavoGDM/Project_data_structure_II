@@ -35,10 +35,16 @@ void changeSite(Graph** graph){
 			break;
 	if (aux ==NULL)
 	{
-		printf("|--Site nao existe ");
+		printf("|--Site nao existe \n");
 		return;
 	}
-	printf("|-- Digite o campo que sera mudado\n|-- NOME [1]\n|-- SO [2]\n|-- HD [3]\n|-- Tamanho do disco [4]\n|--");
+	system("cls");
+	printf("|--------------------------------------|\n");
+	printf("|-- Id[%02.2d]\n|-- Nome : %-0.20s",aux->id , aux->inf.name );
+	printf("|-- S.O : %-0.20s|-- HD : %-0.20s",aux->inf.OS , aux->inf.HD );
+	printf("|-- Disk Space : %d\n",aux->inf.diskSpace);
+	printf("|--------------------------------------|\n");
+	printf("|-- Digite o campo que sera mudado\n|-- NOME [1]\n|-- S.O. [2]\n|-- H.D. [3]\n|-- Tamanho do disco em GB [4]\n|--Sair [0]\n|--");
 	scanf("%d",&option);
 	switch(option){
 		case 1:
@@ -63,6 +69,8 @@ void changeSite(Graph** graph){
 		scanf("%d",&site.inf.diskSpace );
 		aux->inf.diskSpace = site.inf.diskSpace;
 		break;
+		default:
+		return;
 	}
 }
 
@@ -115,7 +123,7 @@ void insertConnection(Graph** graph){
 	scanf("%i",&vert1);
 	list = (*graph)->listGraph;
 	if (searchVertx(&list, vert1 ) == NULL){
-		printf("|--Site nao existe ");
+		printf("|--Site nao existe \n");
 		return;
 	}
 	//searchVertx(Vertex** list, int id );
@@ -141,7 +149,7 @@ void insertConnection(Graph** graph){
 	printf("|--Insira a Distancia em metros  \n|-- ");
 	scanf("%d",&adj.distance);
 	insertNetworkEdge(&(*graph),vert1,adj);
-
+	printf("|--Inserido com sucesso\n|-- ");	
 
 }
 
@@ -204,4 +212,27 @@ void changeConnection(Graph** graph){
 	}
 		printf("|--Conexao nao existe \n");
 		return;
+}
+
+void serchPathNetwork( Graph** graph ){
+	int vert1,vert2;
+	Vertex* list;
+	printf("|--Insira o id oringem   \n|-- ");
+	scanf("%d",&vert1);
+	list = (*graph)->listGraph;
+	if (searchVertx(&list, vert1 ) == NULL){
+		printf("|--Site nao existe ");
+		return;
+	}
+	printf("|--Insira o id destino  \n|-- ");
+	scanf("%d",&vert2);
+	list = (*graph)->listGraph;
+	if (searchVertx(&list, vert2) == NULL){
+		printf("|--Site nao existe \n");
+		return;
+	}
+	if (seachPath(&(*graph),vert1,vert2))
+		printf("|--Caminho existe \n");
+	else
+		printf("|--Caminho nao existe \n");
 }

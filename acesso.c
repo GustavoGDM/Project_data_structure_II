@@ -1,4 +1,4 @@
-	#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
@@ -49,6 +49,7 @@ typedef struct
 	int distance;
 	struct Edge* nextEdge;
 }Edge;
+	enum edgeFild {avlbty,transfer_speed,distance};
 
 typedef struct
 {
