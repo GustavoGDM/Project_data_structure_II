@@ -25,7 +25,8 @@ int menuAdm(tree** root, Graph** graph ){
 		printf("|- Alterar Conexao -------------- [13] | \n");// <- Funcionando
 		printf("|- Excluir Conexao -------------- [14] | \n");// <- Funcionando
 		printf("|- Numero de vertices e aresta -- [15] | \n");// <- Funcionando
-		printf("|- Busca caminho entre 2 vertices [16] | \n");
+		printf("|- Busca caminho entre 2 vertices [16] | \n");// <- Funcionando
+		printf("|- Caminho Minimo                 [17] | \n");// <- Funcionando
 		printf("|- Sair ------------------------- [00] |\n");
 		printf("|------------------------------->");
 		scanf("%d",&option);
@@ -205,6 +206,16 @@ int menuAdm(tree** root, Graph** graph ){
 			printf("|      CAMINHO ENTRE DOIS VERTICES     |\n");
 			printf("|______________________________________|\n");
 			serchPathNetwork(&(*graph));
+			printf("|______________________________________|\n");
+			getch();
+			break;
+			case 17:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|             CAMINHO MINIMO           |\n");
+			printf("|______________________________________|\n");
+			serchMinPathNetwork(&(*graph));
 			printf("|______________________________________|\n");
 			getch();
 			break;

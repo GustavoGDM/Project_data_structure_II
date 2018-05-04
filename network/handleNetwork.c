@@ -236,3 +236,16 @@ void serchPathNetwork( Graph** graph ){
 	else
 		printf("|--Caminho nao existe \n");
 }
+
+void serchMinPathNetwork( Graph** graph ){
+	int vert1;
+	Vertex* list;
+	printf("|--Insira o id oringem   \n|-- ");
+	scanf("%d",&vert1);
+	list = (*graph)->listGraph;
+	if (searchVertx(&list, vert1 ) == NULL){
+		printf("|--Site nao existe ");
+		return;
+	}
+	minPath( &(*graph), vert1);
+}
