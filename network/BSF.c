@@ -15,7 +15,7 @@ int cstINFINITY(Graph** graph){
 	return SUM;
 }
 
-void minPath( Graph** graph, int s)
+int minPath( Graph** graph, int vertOrig, int vertDest)
 {
    int hook[(*graph)->vert],v;
    int dist[(*graph)->vert];
@@ -25,12 +25,12 @@ void minPath( Graph** graph, int s)
    // inicialização:
    for (v = 0; v < (*graph)->vert; ++v)
       pa[v] = -1, dist[v] = INFINITY,hook[v]=-1;
-   pa[s] = s, dist[s] = 0,hook[s] = s;
-   Adj = searcheEdge(&(*graph)->listGraph,s);
+   pa[vertOrig] = vertOrig, dist[vertOrig] = 0,hook[vertOrig] = vertOrig;
+   Adj = searcheEdge(&(*graph)->listGraph,vertOrig);
    for (Adj ; Adj != NULL; Adj = Adj->nextEdge)
    {
       dist[Adj->id] = Adj->distance;
-      hook[Adj->id] = s;
+      hook[Adj->id] = vertOrig;
    }
 
    while (1) 
@@ -57,11 +57,5 @@ void minPath( Graph** graph, int s)
          }
       }
    }
-   Vertex* list= (*graph)->listGraph ;
-   int vert;
-   for (vert = 0; vert < (*graph)->vert; ++vert)
-   {
-      printf("|-- V [%d] || PA [%d] || DIST [%d]\n",list->id,pa[vert],dist[vert] );
-      list = list->nextVertex;
-   }
+   return dist[vertDest];
 }

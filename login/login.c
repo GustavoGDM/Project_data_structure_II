@@ -18,7 +18,7 @@ infUser loginUser(tree** root){
 	infUser user;
 	node userNode;
 	begin:
-	//system("cls");
+	system("cls");
 	printf(" ______________________________________ \n");
 	printf("|                                      |\n");
 	printf("|                 LOGIN                |\n");
@@ -35,9 +35,8 @@ infUser loginUser(tree** root){
 	userNode = authenticateLogin(&(*root),user);
 	if (userNode == NULL)
 	{
-		system("cls");
 		printf("|---------- LOGIN INVALIDO -----------|\n");
-		system("pause");
+		getch();
 		goto begin;
 	}
 	else
@@ -61,7 +60,7 @@ void login(tree** root,Graph** graph){
 				case noAcess:
 				break;
 				case basicUser:
-				menuUser(&aux, &(*graph));
+				menuUser(&(*graph));
 				break;
 				case adimin:
 				menuAdm( &aux, &(*graph));

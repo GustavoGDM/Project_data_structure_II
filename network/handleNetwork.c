@@ -144,12 +144,12 @@ void insertConnection(Graph** graph){
 		printf("|-- Valor não é valido\n");
 		goto availability;
 	}
-	printf("|--Insira a Taxa de trasferência \n|-- ");
+	printf("|--Insira a Taxa de trasferência MB \n|-- ");
 	scanf("%f",&adj.transfer_speed);
 	printf("|--Insira a Distancia em metros  \n|-- ");
 	scanf("%d",&adj.distance);
 	insertNetworkEdge(&(*graph),vert1,adj);
-	printf("|--Inserido com sucesso\n|-- ");	
+	printf("|--Inserido com sucesso\n");	
 
 }
 
@@ -214,8 +214,9 @@ void changeConnection(Graph** graph){
 		return;
 }
 
-void serchPathNetwork( Graph** graph ){
-	int vert1,vert2;
+void transferFilesToSite( Graph** graph ){
+	int vert1,vert2,option;
+	float result;
 	Vertex* list;
 	printf("|--Insira o id oringem   \n|-- ");
 	scanf("%d",&vert1);
@@ -231,21 +232,25 @@ void serchPathNetwork( Graph** graph ){
 		printf("|--Site nao existe \n");
 		return;
 	}
-	if (seachPath(&(*graph),vert1,vert2))
-		printf("|--Caminho existe \n");
-	else
-		printf("|--Caminho nao existe \n");
-}
-
-void serchMinPathNetwork( Graph** graph ){
-	int vert1;
-	Vertex* list;
-	printf("|--Insira o id oringem   \n|-- ");
-	scanf("%d",&vert1);
-	list = (*graph)->listGraph;
-	if (searchVertx(&list, vert1 ) == NULL){
-		printf("|--Site nao existe ");
+	if (!seachPath(&(*graph),vert1,vert2)){
+		printf("|--Os sites Ñão estão conecatados\n");
 		return;
 	}
-	minPath( &(*graph), vert1);
+	printf("|-- O arquivo a ser transferido pode ser pelo caminho  \n|-- Maior Disponibilidade [0]\n|-- Maior Taixa de  transferido  [1]\n|-- Menor Distancia [2]\n|-- ");
+	scanf("%d",&option);
+	switch(option){
+		case avlbty:
+			result = searchMaxPath( &(*graph), avlbty , vert1, vert2);
+			printf("|-- Total acumulado de Disponibilidade no caminho  %.2f \n",result);
+		break;
+		case transfer_speed:
+			result = searchMaxPath( &(*graph), transfer_speed , vert1, vert2);
+			printf("|-- A soma do caminho com maior velocidades eh %.2f MB \n",result);
+		break;
+		case distance:
+			result = minPath( &(*graph), vert1, vert2);
+			printf("|-- O Menor caminho Entre os dois sites eh %.0f metros \n",result);
+		break;
+	}
+	return;
 }

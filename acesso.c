@@ -58,7 +58,7 @@ typedef struct
 	char HD[20];
 	int diskSpace;
 	int flag;
-	
+
 }sit;
 
 typedef struct
@@ -87,7 +87,7 @@ int main()
 	inicilizerTree(&root);
 	inicilizerGraph(&graph);
 	login(&root,&graph);
-	closingTree(&root);	
+	closingTree(&root);
 	writeGraph(&graph);
 	closingGraph(&graph);
 	return 0;
