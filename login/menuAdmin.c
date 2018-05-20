@@ -30,14 +30,6 @@ int menuAdm(tree** root, Graph** graph ){
 		printf("|------------------------------->");
 		scanf("%d",&option);
 		switch(option){
-			// system("cls");
-			// printf(" ______________________________________ \n");
-			// printf("|                                      |\n");
-			// printf("| - |\n");
-			// printf("|______________________________________|\n");
-			//->
-			// printf("|______________________________________|\n");
-			// getch();
 			case 1: // Inserir Usuario
 			system("cls");
 			printf(" ______________________________________ \n");
@@ -88,7 +80,7 @@ int menuAdm(tree** root, Graph** graph ){
 				show(&(aux->user));
 			else
 				printf("|-- Usuário nao encontrado\n");
-			printf("|______________________________________|\n");
+			printf("\n|______________________________________|\n");
 			getch();
 			break;
 			case 5:

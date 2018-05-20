@@ -1,11 +1,13 @@
+void showVert(Vertex* list){
+	printf("|-- Id[%02.2d] Nome : %-0.20s",list->id , list->inf.name );
+}
+
 void showSites(Graph** graph){
 	Vertex* aux;
 	for (aux = (*graph)->listGraph; aux != NULL ; aux = aux->nextVertex )
-	{
-		
+	{	
 		printf("|-- Id[%02.2d]\n",aux->id);
 		printf("|-- Nome : %-0.20s",aux->inf.name);
-
 		printf("|--------------------------------------|\n");
 	}
 }
@@ -18,7 +20,6 @@ void showSitesAndConnections(Graph** graph){
 		printf("|-- Id[%02.2d] Nome : %-0.20s",list->id , list->inf.name );
 		for (adj = list->nextEdge; adj != NULL ; adj = adj->nextEdge)
 		{
-
 			printf("|   |->Conexao : Id[%02d]\n|     [-> Disponibilidade [%0d]\n|     [-> Tempo de trasferencia [%.2f]\n|     [-> Distancia em metros [%d]\n",adj->id,adj->avlbty,adj->transfer_speed,adj->distance );
 		}
 	}
