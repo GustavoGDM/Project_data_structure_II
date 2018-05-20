@@ -27,8 +27,8 @@ typedef struct
 	int permition;
 }infUser;
 
-	enum permition {noAcess,basicUser,adimin};
-	enum userFild {username,name,password,permition};
+enum permition {noAcess,basicUser,adimin};
+enum userFild {username,name,password,permition};
 
 typedef struct {
 	infUser user;
@@ -39,6 +39,12 @@ typedef struct {
 
 typedef tree* node;
 
+// -> Graph
+typedef struct{
+	char name[20];
+	int id;
+	struct Files* nextFile;
+}Files;
 
 typedef struct
 {
@@ -49,7 +55,8 @@ typedef struct
 	int distance;
 	struct Edge* nextEdge;
 }Edge;
-	enum edgeFild {avlbty,transfer_speed,distance};
+
+enum edgeFild {avlbty,transfer_speed,distance};
 
 typedef struct
 {
@@ -66,6 +73,7 @@ typedef struct
 	int id;
 	sit inf;
 	Edge* nextEdge;
+	Edge* nextFile;
 	struct Vertex* nextVertex;
 }Vertex;
 
@@ -79,6 +87,7 @@ typedef struct
 #include "network\network.h"
 #include "acess\acess.h"
 #include "login\login.h"
+#include "files\files.h"
 
 int main()
 {
@@ -86,8 +95,10 @@ int main()
 	Graph *graph = NULL;
 	inicilizerTree(&root);
 	inicilizerGraph(&graph);
+	inicilizerFiles(&graph);
 	login(&root,&graph);
 	closingTree(&root);
+	writeFiles(&graph);
 	writeGraph(&graph);
 	closingGraph(&graph);
 	return 0;

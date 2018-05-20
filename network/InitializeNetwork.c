@@ -45,12 +45,18 @@ void inicilizerGraph(Graph** graph){
 
 void closingGraph(Graph** graph){
 	Vertex* list,* listAux;
-	Edge* adj,*adjAux;
-	for (list = (*graph)->listGraph ; list != NULL; list = list->nextVertex)
+	Edge *adj,*adjAux;
+	Files *file,*fileAux;
+	for (list = (*graph)->listGraph ; list != NULL; list = list->nextVertex){
 		for (adj = list->nextEdge; adj != NULL ; adj = adjAux){
 			adjAux = adj->nextEdge;
 			free(adj);
 		}
+		for ( file = list->nextFile ; file != NULL ; file = fileAux){
+			fileAux = file->nextFile;
+			free(free);
+		}
+	}
 	for (list = (*graph)->listGraph ; list != NULL; list = listAux){
 		listAux = list->nextVertex;
 		free(list);
