@@ -54,7 +54,7 @@ void closingGraph(Graph** graph){
 		}
 		for ( file = list->nextFile ; file != NULL ; file = fileAux){
 			fileAux = file->nextFile;
-			free(free);
+			free(file);
 		}
 	}
 	for (list = (*graph)->listGraph ; list != NULL; list = listAux){

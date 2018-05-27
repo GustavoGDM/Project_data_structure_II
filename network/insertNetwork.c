@@ -39,6 +39,7 @@ int newVertex(Vertex** list,Vertex insert){
 		aux->inf = insert.inf;
 		aux->nextEdge = NULL;
 		aux->nextVertex = NULL;
+		aux->nextFile = NULL;
 		(*list)->nextVertex = aux;
 		return 1;
 	}
@@ -57,6 +58,7 @@ void insertNetworkVertex(Graph** graph,Vertex insert){
 		aux->inf = insert.inf;
 		aux->nextEdge = NULL;
 		aux->nextVertex = NULL;
+		aux->nextFile = NULL;
 		(*graph)->listGraph = aux;
 		(*graph)->vert++;
 		return;

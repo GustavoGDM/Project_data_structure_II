@@ -26,6 +26,10 @@ int menuAdm(tree** root, Graph** graph ){
 		printf("|- Excluir Conexao -------------- [14] | \n");// <- Funcionando
 		printf("|- Numero de vertices e aresta -- [15] | \n");// <- Funcionando
 		printf("|- Busca caminho entre 2 vertices [16] | \n");// <- Funcionando
+		printf("|- Inserir Arquivo -------------- [17] | \n");// 
+		printf("|- Remove Arquivo --------------- [18] | \n");// 
+		printf("|- Listar Arquivo --------------- [19] | \n");// 
+		printf("|- Exibir Sites,Conexao e Arquivo [20] | \n");// <- Funcionando
 		printf("|- Sair ------------------------- [00] |\n");
 		printf("|------------------------------->");
 		scanf("%d",&option);
@@ -199,6 +203,46 @@ int menuAdm(tree** root, Graph** graph ){
 			printf("|______________________________________|\n");
 			getch();
 			break;		
+			case 17:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|       INSERIR AQUIVO EM VERTICES     |\n");
+			printf("|______________________________________|\n");
+			insertFileNetwork(&(*graph));
+			printf("|______________________________________|\n");
+			getch();
+			break;
+			case 18:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|       REMOVER AQUIVO EM VERTICES     |\n");
+			printf("|______________________________________|\n");
+			removeFileNetwork(&(*graph));
+			printf("|______________________________________|\n");
+			getch();
+			break;
+			case 19:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|       LISTAR AQUIVO EM VERTICES     |\n");
+			printf("|______________________________________|\n");
+			showAllFileVertex(&(*graph)->listGraph);
+			printf("\n|______________________________________|\n");
+			getch();
+			break;
+			case 20:
+			system("cls");
+			printf(" ______________________________________ \n");
+			printf("|                                      |\n");
+			printf("|     LISTAR SITES,CONEXOES E ARQUIVO  |\n");
+			printf("|______________________________________|\n");
+			showSitesAndConnectionsAndFiles(&(*graph));
+			printf("\n|______________________________________|\n");
+			getch();
+			break;
 			case 0:
 			break;
 			default:

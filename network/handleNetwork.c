@@ -218,18 +218,23 @@ void changeConnection(Graph** graph){
 void transferFilesToSite( Graph** graph ){
 	int vert1,vert2,option;
 	float result;
-	Vertex* list;
+	Vertex* list,*lsitv1,*lsitv2;
+	Files file;
+	list = (*graph)->listGraph;
 	printf("|--Insira o id oringem   \n|-- ");
 	scanf("%d",&vert1);
-	list = (*graph)->listGraph;
-	if (searchVertx(&list, vert1 ) == NULL){
+	lsitv1 = searchVertx(&list, vert1);
+	if ( lsitv1  == NULL){
 		printf("|--Site nao existe ");
 		return;
 	}
+	showFileVertex(&list);
+	printf("|--Insira o nome do arquivo  \n|-- ");
+	scanf("%d",&file.name);
 	printf("|--Insira o id destino  \n|-- ");
-	scanf("%d",&vert2);
-	list = (*graph)->listGraph;
-	if (searchVertx(&list, vert2) == NULL){
+	scanf("%d",&file.id);
+	lsitv2 = searchVertx(&list, file.id);
+	if ( lsitv2  == NULL){
 		printf("|--Site nao existe \n");
 		return;
 	}
@@ -237,6 +242,9 @@ void transferFilesToSite( Graph** graph ){
 		printf("|--Os sites Ñão estão conecatados\n");
 		return;
 	}
+
+	removeFile(&list,file.name );
+	insertnewFile(&list,file );
 	printf("|-- O arquivo a ser transferido pode ser pelo caminho  \n|-- Maior Disponibilidade [0]\n|-- Maior Taixa de  transferido  [1]\n|-- Menor Distancia [2]\n|-- ");
 	scanf("%d",&option);
 	switch(option){
@@ -255,3 +263,4 @@ void transferFilesToSite( Graph** graph ){
 	}
 	return;
 }
+
