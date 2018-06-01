@@ -216,7 +216,7 @@ void changeConnection(Graph** graph){
 }
 
 void transferFilesToSite( Graph** graph ){
-	int vert1,vert2,option;
+	int vert1,option;
 	float result;
 	Vertex* list,*lsitv1,*lsitv2;
 	Files file;
@@ -227,10 +227,16 @@ void transferFilesToSite( Graph** graph ){
 	if ( lsitv1  == NULL){
 		printf("|--Site nao existe ");
 		return;
+	}else if (lsitv1->nextFile == NULL)
+	{
+		printf("|--Site nao tem arquivo ");
+		return;
 	}
-	showFileVertex(&list);
+	showFileVertex(&lsitv1);
 	printf("|--Insira o nome do arquivo  \n|-- ");
-	scanf("%d",&file.name);
+	fflush(stdin);
+	scanf("%s",file.name);
+	fflush(stdin);
 	printf("|--Insira o id destino  \n|-- ");
 	scanf("%d",&file.id);
 	lsitv2 = searchVertx(&list, file.id);
@@ -238,26 +244,27 @@ void transferFilesToSite( Graph** graph ){
 		printf("|--Site nao existe \n");
 		return;
 	}
-	if (!seachPath(&(*graph),vert1,vert2)){
+	
+	if (!seachPath(&(*graph),vert1,file.id)){
 		printf("|--Os sites Ñão estão conecatados\n");
 		return;
 	}
 
-	removeFile(&list,file.name );
-	insertnewFile(&list,file );
+	removeFile(&lsitv1,file.name );
+	insertnewFile(&lsitv2->nextFile,file );
 	printf("|-- O arquivo a ser transferido pode ser pelo caminho  \n|-- Maior Disponibilidade [0]\n|-- Maior Taixa de  transferido  [1]\n|-- Menor Distancia [2]\n|-- ");
 	scanf("%d",&option);
 	switch(option){
 		case avlbty:
-			result = searchMaxPath( &(*graph), avlbty , vert1, vert2);
+			result = searchMaxPath( &(*graph), avlbty , vert1, file.id);
 			printf("|-- Total acumulado de Disponibilidade no caminho  %.2f \n",result);
 		break;
 		case transfer_speed:
-			result = searchMaxPath( &(*graph), transfer_speed , vert1, vert2);
+			result = searchMaxPath( &(*graph), transfer_speed , vert1, file.id);
 			printf("|-- A soma do caminho com maior velocidades eh %.2f MB \n",result);
 		break;
 		case distance:
-			result = minPath( &(*graph), vert1, vert2);
+			result = minPath( &(*graph), vert1, file.id);
 			printf("|-- O Menor caminho Entre os dois sites eh %.0f metros \n",result);
 		break;
 	}

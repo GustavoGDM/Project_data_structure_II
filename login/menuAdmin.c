@@ -17,18 +17,15 @@ int menuAdm(tree** root, Graph** graph ){
 		printf("|- Excluir Usuario -------------- [05] | \n");
 		printf("|- Inserir Sites ---------------- [06] | \n");// <- Funcionando
 		printf("|- Alterar Sites ---------------- [07] | \n");// <- Funcionando
-		printf("|- Exibir  Sites ---------------- [08] | \n");// <- Funcionando
 		printf("|- Buscar  Sites ---------------- [09] | \n");// <- Funcionando
 		printf("|- Excluir sites ---------------- [10] | \n");// <- Funcionando
 		printf("|- Inserir Conexao -------------- [11] | \n");// <- Funcionando
-		printf("|- Exibir Sites e Conexao ------- [12] | \n");// <- Funcionando
 		printf("|- Alterar Conexao -------------- [13] | \n");// <- Funcionando
 		printf("|- Excluir Conexao -------------- [14] | \n");// <- Funcionando
 		printf("|- Numero de vertices e aresta -- [15] | \n");// <- Funcionando
 		printf("|- Busca caminho entre 2 vertices [16] | \n");// <- Funcionando
 		printf("|- Inserir Arquivo -------------- [17] | \n");// 
 		printf("|- Remove Arquivo --------------- [18] | \n");// 
-		printf("|- Listar Arquivo --------------- [19] | \n");// 
 		printf("|- Exibir Sites,Conexao e Arquivo [20] | \n");// <- Funcionando
 		printf("|- Sair ------------------------- [00] |\n");
 		printf("|------------------------------->");

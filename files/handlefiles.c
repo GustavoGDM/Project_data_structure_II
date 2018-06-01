@@ -44,12 +44,11 @@
 
 
 void insertnewFile(Files** files ,Files insert){
-	if( (*files) ==NULL ){
+	if( (*files) == NULL ){
 		Files *temp;
 		temp =(Files *) malloc(sizeof(Files));
 		temp->id = insert.id;
 		strcpy(temp->name,insert.name);
-		temp->nextFile = NULL;
 		(*files) = temp;
 		return;
 	}
@@ -60,33 +59,33 @@ void insertnewFile(Files** files ,Files insert){
 
 void removeFile(Vertex **list , char name[]){
 	Files *fileBack = NULL,*fileAux = NULL;
-	fileAux = (*list)->nextFile ; 
-	while(fileAux != NULL){
-		if (strcmp(fileAux->name,name) == 0)
+	for (fileAux = (*list)->nextFile; fileAux != NULL; fileAux = fileAux->nextFile)
+	{	
+		if (strcmp(fileAux->name,name) == 0){
 			break;
-		fileBack = fileAux;
-		fileAux = fileAux->nextFile;
+		else
+			fileBack = fileAux;
 	}
 	
-	if ( fileBack == NULL && fileAux->nextFile != NULL )
+	if ( fileBack == NULL && fileAux->nextFile == NULL)
 	{
-		(*list)->nextFile = fileAux->nextFile;
+		(*list)->nextFile = NULL;
 		free(fileAux);
 	}
-	else if ( fileBack != NULL && fileAux == NULL )
-	{
-		free(fileBack->nextFile);
-		fileBack->nextFile = NULL;
-	}
-	else if ( fileBack == NULL && fileAux == NULL)
-	{
-		(*list)->nextFile = fileAux->nextFile;
-		free(fileAux);
-	}
-	else if ( fileBack != NULL && fileAux != NULL )
+	else if ( fileBack != NULL && fileAux->nextFile != NULL )
 	{
 		fileBack->nextFile = fileAux->nextFile;
 		free(fileAux);
+	}
+	else if ( fileBack != NULL && fileAux->nextFile == NULL )
+	{
+		fileBack->nextFile = NULL;
+		free(fileAux);
+	}
+	else if ( fileBack == NULL && fileAux->nextFile != NULL )
+	{
+		(*list)->nextFile = fileAux->nextFile;
+		free(fileAux);	
 	}
 	return;
 }
@@ -153,9 +152,14 @@ void removeFileNetwork(Graph** graph){
 		printf("|--Site nao existe \n");
 		return;
 	}
+	if (list->nextFile == NULL){
+		printf("|--Site nao Contem Arquivos \n");
+		return;
+	}
+	showFileVertex(&list);
 	printf("|--Insira o Nome do arquivo  \n|-- ");
 	fflush(stdin);
 	scanf("%s",insert.name);
-	removeFile(&(*graph)->listGraph,insert.name);
+	removeFile(&list,insert.name);
 	printf("|-- Excluido com sucesso \n");
 }
