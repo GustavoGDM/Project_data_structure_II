@@ -6,19 +6,15 @@ int cstINFINITY(Graph** graph){
 	Vertex* list;
 	Edge* Adj;
 	for (list= (*graph)->listGraph; list != NULL; list = list->nextVertex)
-	{
 		for (Adj = list->nextEdge; Adj != NULL ; Adj = Adj->nextEdge)
-		{
 			SUM += Adj->distance;
-		}
-	}
 	return SUM;
 }
 
 int minPath( Graph** graph, int vertOrig, int vertDest)
 {
    int hook[(*graph)->vert],v;
-   int dist[(*graph)->vert];
+   int dist[(*graph)->vert];  
    int pa[(*graph)->vert];
    const int INFINITY = cstINFINITY(&(*graph));
    Edge* Adj;

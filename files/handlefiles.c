@@ -61,7 +61,7 @@ void removeFile(Vertex **list , char name[]){
 	Files *fileBack = NULL,*fileAux = NULL;
 	for (fileAux = (*list)->nextFile; fileAux != NULL; fileAux = fileAux->nextFile)
 	{	
-		if (strcmp(fileAux->name,name) == 0){
+		if (strcmp(fileAux->name,name) == 0)
 			break;
 		else
 			fileBack = fileAux;
@@ -114,7 +114,6 @@ void showSitesAndConnectionsAndFiles(Graph** graph){
 		if(list->nextFile != NULL)
 		{
 			printf("|-> ARQUIVOS :\n");
-			printf("|   \n");
 			showFileVertex(&list);
 		}
 		printf("|-> CONEXOES\n");

@@ -221,6 +221,7 @@ void transferFilesToSite( Graph** graph ){
 	Vertex* list,*lsitv1,*lsitv2;
 	Files file;
 	list = (*graph)->listGraph;
+	showSites(&(*graph));
 	printf("|--Insira o id oringem   \n|-- ");
 	scanf("%d",&vert1);
 	lsitv1 = searchVertx(&list, vert1);

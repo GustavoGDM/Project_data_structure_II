@@ -34,8 +34,6 @@ static float maxPath( Vertex** list, int option, int vert1, int vert2)
 	float maxv = -1;
 	Vertex *listAux;
 	if (vert1 == vert2){
-		listAux = searchVertx(&(*list),vert2);
-		showVert(listAux);
 		return 0;
 	}
 	visit[vert1] = 1;
@@ -48,13 +46,11 @@ static float maxPath( Vertex** list, int option, int vert1, int vert2)
 			float maxw = maxPath( &(*list),option,Adj->id,vert2);
 			if (option == transfer_speed){
 				if (maxw != -1 && maxv < Adj->transfer_speed + maxw){
-					showVert(listAux);
 					maxv = Adj->transfer_speed + maxw;
 				}
 			}
 			else if (option == avlbty){
 				if (maxw != -1 && maxv < Adj->avlbty + maxw){
-					showVert(listAux);
 					maxv = Adj->avlbty + maxw;
 				}
 			}
